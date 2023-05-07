@@ -218,7 +218,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
   HAL_TIM_Base_Start_IT(&htim2);
-  HAL_ADC_Start(&hadc1);
+//  HAL_ADC_Start(&hadc1);
 //  int index=0;
   /* USER CODE END 2 */
 
@@ -601,11 +601,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     velocityOpenloop(5);
     index1+=1;
     if (index1 == 200){
-		adc_values[0] = HAL_ADC_GetValue(&hadc1); // Get IN1 converted value
-		adc_values[1] = HAL_ADC_GetValue(&hadc1); // Get IN2 converted value
-		adc_values[2] = HAL_ADC_GetValue(&hadc1); // Get IN3 converted value
-		sprintf(data, "sensed voltage: %u  \t %u \t %u  \n", adc_values[0] ,adc_values[1],adc_values[2]  );
-//    	sprintf(data, "open loop control \n");
+//		adc_values[0] = HAL_ADC_GetValue(&hadc1); // Get IN1 converted value
+//		adc_values[1] = HAL_ADC_GetValue(&hadc1); // Get IN2 converted value
+//		adc_values[2] = HAL_ADC_GetValue(&hadc1); // Get IN3 converted value
+//		sprintf(data, "sensed voltage: %u  \t %u \t %u  \n", adc_values[0] ,adc_values[1],adc_values[2]  );
+    	sprintf(data, "open loop control \n");
     	HAL_UART_Transmit(&hlpuart1,(uint8_t *)data, strlen(data),100);
     	index1=0;
     }
