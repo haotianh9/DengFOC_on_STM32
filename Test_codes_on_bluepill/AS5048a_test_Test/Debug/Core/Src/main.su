@@ -1,0 +1,7 @@
+../Core/Src/main.cpp:79:5:int main()	48	static
+../Core/Src/main.cpp:148:6:void SystemClock_Config()	88	static
+../Core/Src/main.cpp:191:13:void MX_SPI1_Init()	8	static
+../Core/Src/main.cpp:227:13:void MX_GPIO_Init()	40	static
+../Core/Src/main.cpp:266:6:void Error_Handler()	4	static,ignoring_inline_asm
+../Core/Src/main.cpp:273:1:void __static_initialization_and_destruction_0(int, int)	16	static
+../Core/Src/main.cpp:273:1:cpp)	8	static

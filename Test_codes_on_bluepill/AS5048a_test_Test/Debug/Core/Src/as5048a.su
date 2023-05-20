@@ -1,0 +1,18 @@
+../Core/Src/as5048a.cpp:6:1:AS5048A::AS5048A(SPI_HandleTypeDef*, GPIO_TypeDef*, uint16_t)	24	static
+../Core/Src/as5048a.cpp:21:6:void AS5048A::init()	16	static
+../Core/Src/as5048a.cpp:35:6:void AS5048A::close()	16	static
+../Core/Src/as5048a.cpp:46:6:void AS5048A::open()	16	static
+../Core/Src/as5048a.cpp:56:9:uint8_t AS5048A::spiCalcEvenParity(uint16_t)	24	static
+../Core/Src/as5048a.cpp:76:10:uint16_t AS5048A::read(uint16_t)	32	static
+../Core/Src/as5048a.cpp:123:10:uint16_t AS5048A::write(uint16_t, uint16_t)	24	static
+../Core/Src/as5048a.cpp:174:10:uint16_t AS5048A::getRawRotation()	16	static
+../Core/Src/as5048a.cpp:183:5:int AS5048A::getRotation()	24	static
+../Core/Src/as5048a.cpp:199:10:uint16_t AS5048A::getState()	16	static
+../Core/Src/as5048a.cpp:206:9:uint8_t AS5048A::error()	16	static
+../Core/Src/as5048a.cpp:214:9:uint8_t AS5048A::getGain()	24	static
+../Core/Src/as5048a.cpp:222:10:uint16_t AS5048A::getErrors()	16	static
+../Core/Src/as5048a.cpp:229:6:void AS5048A::setZeroPosition(uint16_t)	16	static
+../Core/Src/as5048a.cpp:236:10:uint16_t AS5048A::getZeroPosition()	16	static
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.100.202210260954/tools/arm-none-eabi/include/c++/10.3.1/cmath:290:5:constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type std::fmod(_Tp, _Up) [with _Tp = float; _Up = int]	24	static
+../Core/Src/as5048a.cpp:243:7:float AS5048A::normalize(float)	16	static
+../Core/Src/as5048a.cpp:261:7:float AS5048A::read2angle(uint16_t)	16	static
