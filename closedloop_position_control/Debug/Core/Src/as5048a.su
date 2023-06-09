@@ -1,0 +1,2 @@
+../Core/Src/as5048a.c:9:9:spiCalcEvenParity	24	static
+../Core/Src/as5048a.c:24:10:read	40	static

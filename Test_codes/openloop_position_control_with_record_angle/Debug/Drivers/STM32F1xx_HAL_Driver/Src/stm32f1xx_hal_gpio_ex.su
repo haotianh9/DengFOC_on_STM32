@@ -1,0 +1,3 @@
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c:81:6:HAL_GPIOEx_ConfigEventout	16	static
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c:95:6:HAL_GPIOEx_EnableEventout	4	static
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c:104:6:HAL_GPIOEx_DisableEventout	4	static

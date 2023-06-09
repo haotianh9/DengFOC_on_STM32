@@ -1,0 +1,14 @@
+../Core/Src/main.c:171:24:LL_SYSTICK_IsActiveCounterFlag	4	static
+../Core/Src/main.c:175:10:getCurrentMicros	24	static
+../Core/Src/main.c:188:7:_electricalAngle	16	static
+../Core/Src/main.c:191:7:_normalizeAngle	24	static
+../Core/Src/main.c:203:6:setPwm	32	static
+../Core/Src/main.c:222:6:setPhaseVoltage	32	static
+../Core/Src/main.c:333:5:main	8	static
+../Core/Src/main.c:384:6:SystemClock_Config	88	static
+../Core/Src/main.c:431:13:MX_SPI1_Init	8	static
+../Core/Src/main.c:469:13:MX_TIM1_Init	96	static
+../Core/Src/main.c:552:13:MX_TIM2_Init	32	static
+../Core/Src/main.c:597:13:MX_GPIO_Init	40	static
+../Core/Src/main.c:640:6:HAL_TIM_PeriodElapsedCallback	32	static
+../Core/Src/main.c:668:6:Error_Handler	4	static,ignoring_inline_asm
