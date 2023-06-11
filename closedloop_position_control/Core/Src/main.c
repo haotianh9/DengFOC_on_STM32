@@ -59,16 +59,8 @@ static void MX_TIM2_Init(void);
 
 /* Private variables ---------------------------------------------------------*/
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_SPI1_Init(void);
-static void MX_TIM1_Init(void);
-static void MX_TIM2_Init(void);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -155,7 +147,7 @@ int index1=0;
 uint16_t raw1,raw2,raw3;
 float motor_target= M_PI/6;
 float Ts=5E-3f;
-float Kp=0.133f;
+float Kp=0.167f;
 int dir=-1;
 //static inline uint32_t LL_SYSTICK_IsActiveCounterFlag(void)
 //{
@@ -174,9 +166,7 @@ int dir=-1;
 //  }
 //  return (m * 1000 + (u * 1000) / tms);
 //}
-float _electricalAngle(float shaft_angle, int pole_pairs) {
-  return (shaft_angle * pole_pairs);
-}
+
 float _normalizeAngle(float angle){
   float a = fmod(angle, 2*M_PI);   //取余运算可以用于归一化，列出特殊值例子算便知
   return a >= 0 ? a : (a + 2*M_PI);
@@ -187,6 +177,10 @@ float _normalizeAngle(float angle){
   //也就是说，如果 angle 的值小于 0 且 _2M_PI 的值为正数，则 fmod(angle, _2M_PI) 的余数将为负数。
   //例如，当 angle 的值为 -M_PI/2，_2M_PI 的值为 2M_PI 时，fmod(angle, _2M_PI) 将返回一个负数。
   //在这种情况下，可以通过将负数的余数加上 _2M_PI 来将角度归一化到 [0, 2M_PI] 的范围内，以确保角度的值始终为正数。
+}
+
+float _electricalAngle(float shaft_angle, int pole_pairs) {
+  return _normalizeAngle(((float)(dir * pole_pairs)*shaft_angle)-zero_electric_angle);
 }
 
 void setPwm(float Ua, float Ub, float Uc) {
@@ -240,7 +234,7 @@ float velocityOpenloop(float target_velocity){
   //因此，电机轴的转动角度取决于目标速度和时间间隔的乘积。
 
   // Uq is not related to voltage limit
-  float Uq = 3.5;
+  float Uq = 5.5;
 
   setPhaseVoltage(Uq,  0, _electricalAngle(shaft_angle, pole_pairs));
 
@@ -352,6 +346,13 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+
+   setPhaseVoltage(3,0,_electricalAngle(M_PI*1.5f,pole_pairs));
+   HAL_Delay(3000);
+   uint16_t read_raw=read(&hspi1, SPI1_CSn_GPIO_Port,SPI1_CSn_Pin,AS5048A_ANGLE);
+   zero_electric_angle=_electricalAngle(M_PI*read_raw/MAX_ANGLE_VALUE,pole_pairs);
+   setPhaseVoltage(0,0,_electricalAngle(M_PI*1.5f,pole_pairs));
+
    HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -637,21 +638,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     index1+=1;
     uint16_t read_raw=read(&hspi1, SPI1_CSn_GPIO_Port,SPI1_CSn_Pin,AS5048A_ANGLE);
     float angle_now=(float)read_raw /(float)MAX_ANGLE_VALUE *M_PI;
-    float angle_error=motor_target-dir*angle_now;
+    float angle_error=motor_target-angle_now;
 
     angle_error=_normalizeAngle(angle_error);
     if (angle_error > M_PI){
-    	angle_error-=M_PI;
+    	angle_error-=2*M_PI;
     }
-    setPhaseVoltage(_constrain(Kp*(angle_error)*180/M_PI,-5.5,5.5),0,_electricalAngle(angle_now,pole_pairs));
+    setPhaseVoltage(_constrain(Kp*(angle_error)/M_PI*180,-voltage_power_supply/2,voltage_power_supply/2),0,_electricalAngle(angle_now,pole_pairs));
 //    velocityOpenloop(5);
 //    sprintf(data, "open loop control \n");
 //    sprintf(data, "angle: %u \n", read_raw);
 //    CDC_Transmit_FS((uint8_t*) data, strlen(data));
-    sprintf(data, "angle_now : %i \n", (int) floor(angle_now*180/M_PI));
-        CDC_Transmit_FS((uint8_t*) data, strlen(data));
-//    sprintf(data, "angle_error : %i \n", (int) floor(angle_error*180/M_PI));
-//    CDC_Transmit_FS((uint8_t*) data, strlen(data));
+//    sprintf(data, "angle_now : %i \n", (int) floor(angle_now*180/M_PI));
+//        CDC_Transmit_FS((uint8_t*) data, strlen(data));
+    sprintf(data, "angle_error : %i \n", (int) floor(angle_error/M_PI*180));
+    CDC_Transmit_FS((uint8_t*) data, strlen(data));
     if (index1 == 200){
     	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
