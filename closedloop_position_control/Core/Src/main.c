@@ -27,6 +27,7 @@
 #include "usbd_cdc_if.h"
 #include "string.h"
 #include "as5048a.h"
+//#include "motor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,10 +58,6 @@ static void MX_TIM2_Init(void);
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-SPI_HandleTypeDef hspi1;
-
-TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 
@@ -102,11 +99,6 @@ TIM_HandleTypeDef htim2;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_SPI1_Init(void);
-static void MX_TIM1_Init(void);
-static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -127,10 +119,7 @@ static void MX_TIM2_Init(void);
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-SPI_HandleTypeDef hspi1;
 
-TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 
@@ -164,27 +153,27 @@ int period=1600;
 int pole_pairs=11;
 int index1=0;
 uint16_t raw1,raw2,raw3;
-float motor_target= 0;
+float motor_target= M_PI/6;
 float Ts=5E-3f;
 float Kp=0.133f;
-
-static inline uint32_t LL_SYSTICK_IsActiveCounterFlag(void)
-{
-  return ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == (SysTick_CTRL_COUNTFLAG_Msk));
-}
-uint32_t getCurrentMicros(void)
-{
-  /* Ensure COUNTFLAG is reset by reading SysTick control and status register */
-  LL_SYSTICK_IsActiveCounterFlag();
-  uint32_t m = HAL_GetTick();
-  const uint32_t tms = SysTick->LOAD + 1;
-  __IO uint32_t u = tms - SysTick->VAL;
-  if (LL_SYSTICK_IsActiveCounterFlag()) {
-    m = HAL_GetTick();
-    u = tms - SysTick->VAL;
-  }
-  return (m * 1000 + (u * 1000) / tms);
-}
+int dir=-1;
+//static inline uint32_t LL_SYSTICK_IsActiveCounterFlag(void)
+//{
+//  return ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == (SysTick_CTRL_COUNTFLAG_Msk));
+//}
+//uint32_t getCurrentMicros(void)
+//{
+//  /* Ensure COUNTFLAG is reset by reading SysTick control and status register */
+//  LL_SYSTICK_IsActiveCounterFlag();
+//  uint32_t m = HAL_GetTick();
+//  const uint32_t tms = SysTick->LOAD + 1;
+//  __IO uint32_t u = tms - SysTick->VAL;
+//  if (LL_SYSTICK_IsActiveCounterFlag()) {
+//    m = HAL_GetTick();
+//    u = tms - SysTick->VAL;
+//  }
+//  return (m * 1000 + (u * 1000) / tms);
+//}
 float _electricalAngle(float shaft_angle, int pole_pairs) {
   return (shaft_angle * pole_pairs);
 }
@@ -234,31 +223,31 @@ void setPhaseVoltage(float Uq,float Ud, float angle_el) {
 
 
 //开环速度函数
-//float velocityOpenloop(float target_velocity){
-////	uint32_t now_us = getCurrentMicros();
-////	uint32_t now_us = HAL_GetTick();
-////  Provides a tick value in microseconds.
-//
-//  //计算当前每个Loop的运行时间间隔
-////  float Ts = (now_us - open_loop_timestamp) * 1e-3f;
-//	float Ts=5E-3f;
-//
-//  // 通过乘以时间间隔和目标速度来计算需要转动的机械角度，存储在 shaft_angle 变量中。
-//  //在此之前，还需要对轴角度进行归一化，以确保其值在 0 到 2π 之间。
-//  shaft_angle = _normalizeAngle(shaft_angle + target_velocity*Ts);
-//  //以目标速度为 10 rad/s 为例，如果时间间隔是 1 秒，则在每个循环中需要增加 10 * 1 = 10 弧度的角度变化量，才能使电机转动到目标速度。
-//  //如果时间间隔是 0.1 秒，那么在每个循环中需要增加的角度变化量就是 10 * 0.1 = 1 弧度，才能实现相同的目标速度。
-//  //因此，电机轴的转动角度取决于目标速度和时间间隔的乘积。
-//
-//  // Uq is not related to voltage limit
-//  float Uq = 5.5;
-//
-//  setPhaseVoltage(Uq,  0, _electricalAngle(shaft_angle, pole_pairs));
-//
-////  open_loop_timestamp = now_us;  //用于计算下一个时间间隔
-//
-//  return Uq;
-//}
+float velocityOpenloop(float target_velocity){
+//	uint32_t now_us = getCurrentMicros();
+//	uint32_t now_us = HAL_GetTick();
+//  Provides a tick value in microseconds.
+
+  //计算当前每个Loop的运行时间间隔
+//  float Ts = (now_us - open_loop_timestamp) * 1e-3f;
+	float Ts=5E-3f;
+
+  // 通过乘以时间间隔和目标速度来计算需要转动的机械角度，存储在 shaft_angle 变量中。
+  //在此之前，还需要对轴角度进行归一化，以确保其值在 0 到 2π 之间。
+  shaft_angle = _normalizeAngle(shaft_angle + target_velocity*Ts);
+  //以目标速度为 10 rad/s 为例，如果时间间隔是 1 秒，则在每个循环中需要增加 10 * 1 = 10 弧度的角度变化量，才能使电机转动到目标速度。
+  //如果时间间隔是 0.1 秒，那么在每个循环中需要增加的角度变化量就是 10 * 0.1 = 1 弧度，才能实现相同的目标速度。
+  //因此，电机轴的转动角度取决于目标速度和时间间隔的乘积。
+
+  // Uq is not related to voltage limit
+  float Uq = 3.5;
+
+  setPhaseVoltage(Uq,  0, _electricalAngle(shaft_angle, pole_pairs));
+
+//  open_loop_timestamp = now_us;  //用于计算下一个时间间隔
+
+  return Uq;
+}
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -647,11 +636,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
     index1+=1;
     uint16_t read_raw=read(&hspi1, SPI1_CSn_GPIO_Port,SPI1_CSn_Pin,AS5048A_ANGLE);
-    float angle_now=read_raw/MAX_ANGLE_VALUE*360;
-    setPhaseVoltage(_constrain(Kp*(motor_target-angle_now)*180/M_PI,-6,6),0,_electricalAngle(angle_now,pole_pairs));
+    float angle_now=(float)read_raw /(float)MAX_ANGLE_VALUE *M_PI;
+    float angle_error=motor_target-dir*angle_now;
+
+    angle_error=_normalizeAngle(angle_error);
+    if (angle_error > M_PI){
+    	angle_error-=M_PI;
+    }
+    setPhaseVoltage(_constrain(Kp*(angle_error)*180/M_PI,-5.5,5.5),0,_electricalAngle(angle_now,pole_pairs));
+//    velocityOpenloop(5);
 //    sprintf(data, "open loop control \n");
-    sprintf(data, "angle: %u \n", read_raw);
-    CDC_Transmit_FS((uint8_t*) data, strlen(data));
+//    sprintf(data, "angle: %u \n", read_raw);
+//    CDC_Transmit_FS((uint8_t*) data, strlen(data));
+    sprintf(data, "angle_now : %i \n", (int) floor(angle_now*180/M_PI));
+        CDC_Transmit_FS((uint8_t*) data, strlen(data));
+//    sprintf(data, "angle_error : %i \n", (int) floor(angle_error*180/M_PI));
+//    CDC_Transmit_FS((uint8_t*) data, strlen(data));
     if (index1 == 200){
     	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
