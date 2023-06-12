@@ -148,7 +148,7 @@ uint16_t raw1,raw2,raw3;
 float motor_target= M_PI/6;
 float Ts=5E-3f;
 float Kp=0.167f;
-int dir=-1;
+int dir=1;
 //static inline uint32_t LL_SYSTICK_IsActiveCounterFlag(void)
 //{
 //  return ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == (SysTick_CTRL_COUNTFLAG_Msk));
@@ -212,6 +212,16 @@ void setPhaseVoltage(float Uq,float Ud, float angle_el) {
   Ua = Ualpha + voltage_power_supply/2;
   Ub = (sqrt(3)*Ubeta-Ualpha)/2 + voltage_power_supply/2;
   Uc = (-Ualpha-sqrt(3)*Ubeta)/2 + voltage_power_supply/2;
+  setPwm(Ua,Ub,Uc);
+}
+
+void setPhaseVoltage_test(float Ua,float Ub, float Uc) {
+
+
+  // 克拉克逆变换
+  Ua +=  voltage_power_supply/2;
+  Ub +=  voltage_power_supply/2;
+  Uc +=  voltage_power_supply/2;
   setPwm(Ua,Ub,Uc);
 }
 
@@ -352,7 +362,8 @@ int main(void)
    uint16_t read_raw=read(&hspi1, SPI1_CSn_GPIO_Port,SPI1_CSn_Pin,AS5048A_ANGLE);
    zero_electric_angle=_electricalAngle(M_PI*read_raw/MAX_ANGLE_VALUE,pole_pairs);
    setPhaseVoltage(0,0,_electricalAngle(M_PI*1.5f,pole_pairs));
-
+   sprintf(data, "zero_electric_angle: %i \n", (int) floor(zero_electric_angle/M_PI*180));
+   CDC_Transmit_FS((uint8_t*) data, strlen(data));
    HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -637,7 +648,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
     index1+=1;
     uint16_t read_raw=read(&hspi1, SPI1_CSn_GPIO_Port,SPI1_CSn_Pin,AS5048A_ANGLE);
-    float angle_now=(float)read_raw /(float)MAX_ANGLE_VALUE *M_PI;
+    float angle_now=(float)read_raw /(float)MAX_ANGLE_VALUE *2*M_PI*dir;
     float angle_error=motor_target-angle_now;
 
     angle_error=_normalizeAngle(angle_error);
@@ -653,9 +664,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //        CDC_Transmit_FS((uint8_t*) data, strlen(data));
     sprintf(data, "angle_error : %i \n", (int) floor(angle_error/M_PI*180));
     CDC_Transmit_FS((uint8_t*) data, strlen(data));
+
     if (index1 == 200){
     	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-
     	index1=0;
     }
   }
