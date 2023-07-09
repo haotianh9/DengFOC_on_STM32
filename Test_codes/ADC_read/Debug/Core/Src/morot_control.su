@@ -1,0 +1,5 @@
+../Core/Src/morot_control.c:16:7:_normalizeAngle	24	static
+../Core/Src/morot_control.c:28:7:_electricalAngle	16	static
+../Core/Src/morot_control.c:35:7:velocityOpenloop	32	static
+../Core/Src/morot_control.c:65:6:setPwm	40	static
+../Core/Src/morot_control.c:84:6:setPhaseVoltage	56	static
