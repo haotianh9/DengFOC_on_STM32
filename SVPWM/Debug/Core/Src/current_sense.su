@@ -1,0 +1,5 @@
+../Core/Src/current_sense.c:12:6:ADC_Select_CH0	24	static
+../Core/Src/current_sense.c:26:6:ADC_Select_CH1	24	static
+../Core/Src/current_sense.c:40:6:ADC_Select_CH2	24	static
+../Core/Src/current_sense.c:53:6:read_ADC_voltage	48	static
+../Core/Src/current_sense.c:72:6:calibrateOffsets	80	static

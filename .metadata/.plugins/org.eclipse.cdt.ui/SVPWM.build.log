@@ -1,0 +1,29 @@
+22:25:00 **** Incremental Build of configuration Debug for project SVPWM ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/motor_control.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/motor_control.d" -MT"Core/Src/motor_control.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/motor_control.o"
+../Core/Src/motor_control.c: In function 'setPhaseVoltage':
+../Core/Src/motor_control.c:90:14: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+   90 |           Uq=abs(Uq);
+      |              ^~~
+../Core/Src/motor_control.c:9:1: note: include '<stdlib.h>' or provide a declaration of 'abs'
+    8 | #include "motor_control.h"
+  +++ |+#include <stdlib.h>
+    9 | 
+../Core/Src/motor_control.c:90:18: warning: 'abs' argument 1 promotes to 'double' where 'int' is expected in a call to built-in function declared without prototype [-Wbuiltin-declaration-mismatch]
+   90 |           Uq=abs(Uq);
+      |                  ^~
+<built-in>: note: built-in 'abs' declared here
+arm-none-eabi-gcc -o "SVPWM.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/haotian/Documents/DengFOC_on_STM32/SVPWM/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SVPWM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: SVPWM.elf
+ 
+arm-none-eabi-size   SVPWM.elf 
+arm-none-eabi-objdump -h -S  SVPWM.elf  > "SVPWM.list"
+   text	   data	    bss	    dec	    hex	filename
+  57640	    580	   6848	  65068	   fe2c	SVPWM.elf
+Finished building: default.size.stdout
+ 
+Finished building: SVPWM.list
+ 
+
+22:25:01 Build Finished. 0 errors, 2 warnings. (took 1s.280ms)
+

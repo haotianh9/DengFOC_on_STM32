@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SVPWM/closed_current_loop.ioc&apos; to &apos;SVPWM.ioc&apos;" description="Rename resource &apos;closed_current_loop.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="closed_current_loop.ioc" name="SVPWM.ioc" stamp="1703571162439" updateReferences="true"/>
+</session>
