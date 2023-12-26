@@ -5,5 +5,5 @@
 ../Core/Src/main.c:233:13:MX_TIM1_Init	96	static
 ../Core/Src/main.c:313:13:MX_TIM2_Init	32	static
 ../Core/Src/main.c:355:13:MX_GPIO_Init	40	static
-../Core/Src/main.c:398:6:HAL_TIM_PeriodElapsedCallback	48	static
-../Core/Src/main.c:453:6:Error_Handler	4	static
+../Core/Src/main.c:402:6:HAL_TIM_PeriodElapsedCallback	48	static
+../Core/Src/main.c:457:6:Error_Handler	4	static

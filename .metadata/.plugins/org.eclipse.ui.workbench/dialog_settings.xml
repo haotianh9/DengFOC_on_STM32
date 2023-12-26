@@ -3,5 +3,11 @@
 	<section name="NewWizardAction">
 	</section>
 	<section name="ImportExportAction">
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="com.st.stm32cube.common.projectcreation.ui.stm32projectfromiocwizard"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.cdt.ui.importWizardCategory"/>
+			<item value="org.eclipse.equinox.p2.category"/>
+		</list>
 	</section>
 </section>

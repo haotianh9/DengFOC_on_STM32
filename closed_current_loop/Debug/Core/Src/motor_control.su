@@ -1,0 +1,5 @@
+../Core/Src/motor_control.c:18:7:_normalizeAngle	24	static
+../Core/Src/motor_control.c:30:7:_electricalAngle	16	static
+../Core/Src/motor_control.c:37:7:velocityOpenloop	32	static
+../Core/Src/motor_control.c:67:6:setPwm	40	static
+../Core/Src/motor_control.c:86:6:setPhaseVoltage	56	static

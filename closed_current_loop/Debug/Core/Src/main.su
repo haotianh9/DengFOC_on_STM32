@@ -1,0 +1,11 @@
+../Core/Src/main.c:88:7:cal_angular_vel	24	static
+../Core/Src/main.c:105:7:cal_Iq	40	static
+../Core/Src/main.c:120:5:main	72	static
+../Core/Src/main.c:177:6:SystemClock_Config	88	static
+../Core/Src/main.c:225:13:MX_ADC1_Init	24	static
+../Core/Src/main.c:290:13:MX_SPI1_Init	8	static
+../Core/Src/main.c:325:13:MX_TIM1_Init	96	static
+../Core/Src/main.c:405:13:MX_TIM2_Init	32	static
+../Core/Src/main.c:447:13:MX_GPIO_Init	40	static
+../Core/Src/main.c:494:6:HAL_TIM_PeriodElapsedCallback	112	static
+../Core/Src/main.c:558:6:Error_Handler	4	static

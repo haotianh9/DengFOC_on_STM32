@@ -1,0 +1,9 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=macosx
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:closedloop_position_control Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ADC_read Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:closedloop_speed_control Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:closed_current_loop Debug
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ADC_read\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ADC_read\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:closedloop_speed_control\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:closedloop_speed_control\ Debug/activeLaunchTarget=null\:---

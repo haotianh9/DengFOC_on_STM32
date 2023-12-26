@@ -1,0 +1,11 @@
+../Core/Src/main.c:88:7:cal_angular_vel	4
+../Core/Src/main.c:105:7:cal_Iq	1
+../Core/Src/main.c:120:5:main	1
+../Core/Src/main.c:177:6:SystemClock_Config	4
+../Core/Src/main.c:225:13:MX_ADC1_Init	5
+../Core/Src/main.c:290:13:MX_SPI1_Init	2
+../Core/Src/main.c:325:13:MX_TIM1_Init	9
+../Core/Src/main.c:405:13:MX_TIM2_Init	4
+../Core/Src/main.c:447:13:MX_GPIO_Init	1
+../Core/Src/main.c:494:6:HAL_TIM_PeriodElapsedCallback	6
+../Core/Src/main.c:558:6:Error_Handler	1

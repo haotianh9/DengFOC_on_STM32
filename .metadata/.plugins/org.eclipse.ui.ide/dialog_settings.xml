@@ -5,4 +5,15 @@
 	</section>
 	<section name="NewWizardAction">
 	</section>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/Users/haotian/Documents/DengFOC_on_STM32/Test_codes/ADC_read"/>
+			<item value="/Users/haotian/Documents/DengFOC_on_STM32/closedloop_position_control"/>
+			<item value="/Users/haotian/Documents/DengFOC_on_STM32/closedloop_speed_control"/>
+		</list>
+	</section>
 </section>

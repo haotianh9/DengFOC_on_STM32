@@ -1,0 +1,10 @@
+22:01:29 **** Build of configuration Debug for project closedloop_speed_control ****
+make -j7 all 
+arm-none-eabi-size   closedloop_speed_control.elf 
+   text	   data	    bss	    dec	    hex	filename
+  52696	    540	   6764	  60000	   ea60	closedloop_speed_control.elf
+Finished building: default.size.stdout
+ 
+
+22:01:30 Build Finished. 0 errors, 0 warnings. (took 743ms)
+
