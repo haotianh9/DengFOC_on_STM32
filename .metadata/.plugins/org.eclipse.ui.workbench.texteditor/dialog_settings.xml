@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="Ts"/>
 		<list key="findhistory">
+			<item value="Ts"/>
+			<item value="period"/>
+			<item value="1600"/>
 			<item value="Rsense"/>
 			<item value="offset"/>
 			<item value="calibrateOffsets"/>
@@ -20,7 +23,6 @@
 			<item value="MX_ADC1_Init"/>
 			<item value="pid_controller"/>
 			<item value="pid"/>
-			<item value="sens"/>
 		</list>
 		<list key="replacehistory">
 		</list>

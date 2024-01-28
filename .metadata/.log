@@ -570,3 +570,29 @@ Project's 'SVPWM' active one is 'SVPWM.ioc' file
 !MESSAGE Invalid Input: Must be project's active .ioc file.
 
 Project's 'SVPWM' active one is 'SVPWM.ioc' file
+!SESSION 2024-01-27 22:36:16.844 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/haotian/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/haotian/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-01-27 22:36:36.963
+!MESSAGE Log4j2 initialized with config file /Users/haotian/Documents/DengFOC_on_STM32/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-01-27 22:36:43.873
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2024-01-27 22:45:29.234 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/haotian/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/haotian/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-01-27 22:45:35.661
+!MESSAGE Log4j2 initialized with config file /Users/haotian/Documents/DengFOC_on_STM32/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-01-27 22:45:43.085
+!MESSAGE Started RMI Server, listening on port 41337

@@ -8,7 +8,7 @@
 #include "pid.h"
 #include "motor_control.h"
 float PID_operator(float error, struct PIDController* pid){
-	float Ts = 5E-3f;
+	float Ts = 2.5E-3f;
 	// P环
 
 	float proportional = pid->P * error;

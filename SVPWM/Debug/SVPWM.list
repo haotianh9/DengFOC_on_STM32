@@ -4570,7 +4570,7 @@ float PID_operator(float error, struct PIDController* pid){
  8002878:	af00      	add	r7, sp, #0
  800287a:	6078      	str	r0, [r7, #4]
  800287c:	6039      	str	r1, [r7, #0]
-	float Ts = 5E-3f;
+	float Ts = 2.5E-3f;
  800287e:	4b6f      	ldr	r3, [pc, #444]	; (8002a3c <PID_operator+0x1c8>)
  8002880:	61bb      	str	r3, [r7, #24]
 	// P环
@@ -4791,7 +4791,7 @@ float PID_operator(float error, struct PIDController* pid){
  8002a36:	3720      	adds	r7, #32
  8002a38:	46bd      	mov	sp, r7
  8002a3a:	bdb0      	pop	{r4, r5, r7, pc}
- 8002a3c:	3ba3d70a 	.word	0x3ba3d70a
+ 8002a3c:	3b23d70a 	.word	0x3b23d70a
 
 08002a40 <HAL_MspInit>:
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);

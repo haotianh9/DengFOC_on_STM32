@@ -1234,3 +1234,28 @@ Finished building: default.size.stdout
  
 Finished building: SVPWM.list
  
+22:46:59 **** Build of configuration Debug for project SVPWM ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/pid.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/pid.d" -MT"Core/Src/pid.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/pid.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:151:26: warning: passing argument 2 of 'calibrateOffsets' from incompatible pointer type [-Wincompatible-pointer-types]
+  151 |   calibrateOffsets(hadc1,&current_offset);
+      |                          ^~~~~~~~~~~~~~~
+      |                          |
+      |                          uint16_t (*)[3] {aka short unsigned int (*)[3]}
+In file included from ../Core/Src/main.c:15:
+../Core/Inc/current_sense.h:23:41: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'uint16_t (*)[3]' {aka 'short unsigned int (*)[3]'}
+   23 | void calibrateOffsets(ADC_HandleTypeDef,uint16_t *);
+      |                                         ^~~~~~~~~~
+arm-none-eabi-gcc -o "SVPWM.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/haotian/Documents/DengFOC_on_STM32/SVPWM/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SVPWM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: SVPWM.elf
+ 
+arm-none-eabi-size   SVPWM.elf 
+arm-none-eabi-objdump -h -S  SVPWM.elf  > "SVPWM.list"
+   text	   data	    bss	    dec	    hex	filename
+  57640	    580	   6848	  65068	   fe2c	SVPWM.elf
+Finished building: default.size.stdout
+ 
+Finished building: SVPWM.list
+ 

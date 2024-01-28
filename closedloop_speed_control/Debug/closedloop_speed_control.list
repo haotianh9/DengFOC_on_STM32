@@ -3531,7 +3531,7 @@ float PID_operator(float error, struct PIDController* pid){
  800201c:	af00      	add	r7, sp, #0
  800201e:	6078      	str	r0, [r7, #4]
  8002020:	6039      	str	r1, [r7, #0]
-	float Ts = 5E-3f;
+	float Ts = 2.5E-3f;
  8002022:	4b6f      	ldr	r3, [pc, #444]	; (80021e0 <PID_operator+0x1c8>)
  8002024:	61bb      	str	r3, [r7, #24]
 	// P环
