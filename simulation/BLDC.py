@@ -20,19 +20,16 @@ class BLDC:
         self.I = np.array([0.0, 0.0, 0.0])
 
     def trapezoidal_waveform(self, offset=0):
-        self.theta = self.theta % (2*np.pi)
-        theta_e = self.theta * self.pole_pairs  # electrical angle
-
-        theta_e += offset
-        theta_e = theta_e % (2*np.pi)
-        if theta_e >= 0 and theta_e <= np.pi/3:
-            return 1
-        elif theta_e >= np.pi/3 and theta_e <= np.pi:
-            return 1-6/np.pi*(theta_e-2*np.pi/3)
-        elif theta_e >= np.pi and theta_e <= 5*np.pi/3:
-            return -1
-        elif theta_e >= 5*np.pi/3 and theta_e <= 2*np.pi:
-            return -1+6/np.pi*(theta_e-5*np.pi/3)
+        theta_e = (self.theta * self.pole_pairs + offset) % (2 * np.pi)
+    
+        if 0 <= theta_e < 2 * np.pi / 3:
+            return 1.0
+        elif 2 * np.pi / 3 <= theta_e < np.pi:
+            return 1.0 - (6 / np.pi) * (theta_e - 2 * np.pi / 3)
+        elif np.pi <= theta_e < 5 * np.pi / 3:
+            return -1.0
+        else:  # 5π/3 <= theta_e < 2π
+            return -1.0 + (6 / np.pi) * (theta_e - 5 * np.pi / 3)
 
     def update_state(self, V, TL, dt):
         ia, ib, ic = self.I
